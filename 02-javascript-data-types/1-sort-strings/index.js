@@ -5,5 +5,14 @@
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
-
+  const sortedArray = [...arr];
+  sortedArray.sort((a, b) => {
+    return a.localeCompare(b, ['ru', 'en'], {
+      caseFirst: 'upper'
+    });
+  });
+  return param === 'desc' ? sortedArray.reverse() : sortedArray;
+  //return param === 'desc' ? [...arr].reverse() : [...arr]; не понимаю почему такая запись не возвращает новый массив
 }
+
+
