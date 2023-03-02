@@ -6,12 +6,12 @@
  */
 export const pick = (obj, ...fields) => {
   const pick = {};
-  for (let key in fields) {
-    if (fields[key] in obj) {
-      let field = fields[key];
-      pick[field] = obj[field]
+  for (const [key, value] of Object.entries(obj)) {
+    if (fields.includes(key)) {
+      pick[key] = value;
     }
   }
   return pick;
 };
+
 
