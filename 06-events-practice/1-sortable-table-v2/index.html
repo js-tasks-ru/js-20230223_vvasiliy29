@@ -1,15 +1,15 @@
 <!doctype html>
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
+  <link href="style.css" rel="stylesheet">
 </head>
 <body>
 
 <div id="root"></div>
 
 <script type="module">
-  import SortableTable from './index.js';
-  import data from './products-data.js';
+  import SortableTable from './index.js'
+  import data from './products-data.js'
 
   const headerConfig = [
     {
@@ -21,7 +21,7 @@
           <div class="sortable-table__cell">
             <img class="sortable-table-image" alt="Image" src="${data[0]?.url}">
           </div>
-        `;
+        `
       }
     },
     {
@@ -48,16 +48,16 @@
       sortable: true,
       sortType: 'number'
     },
-  ];
+  ]
 
   const sortableTable = new SortableTable(headerConfig, {
     data,
     sorted: {
       id: headerConfig.find(item => item.sortable).id,
-      order: 'asc'
+      order: SortableTable.ASC
     }
-  });
-
-  root.append(sortableTable.element);
+  })
+  const root = document.getElementById('root')
+  root.append(sortableTable.element)
 </script>
 </body>
