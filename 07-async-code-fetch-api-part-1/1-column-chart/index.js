@@ -7,8 +7,14 @@ export default class ColumnChart {
   chartHeight = 50
   data = {}
 
-  constructor ({ url = '', range = {}, label = '', link = '', formatHeading = (data) => data } = {}) {
-    this.pathname = url;
+  constructor ({
+    url = '',
+    range = { from: new Date(), to: new Date() },
+    label = '',
+    link = '',
+    formatHeading = (data) => data
+  } = {}) {
+    this.url = new URL(url, BACKEND_URL);
     this.range = range;
     this.label = label;
     this.link = link;
@@ -75,11 +81,10 @@ export default class ColumnChart {
   }
 
   async loadData (from, to) {
-    const url = new URL(this.pathname, BACKEND_URL);
-    url.searchParams.append('to', to.toISOString());
-    url.searchParams.append('from', from.toISOString());
+    this.url.searchParams.set('to', to.toISOString());
+    this.url.searchParams.set('from', from.toISOString());
 
-    this.data = await fetchJson(url);
+    this.data = await fetchJson(this.url);
     return this.data;
   }
 
