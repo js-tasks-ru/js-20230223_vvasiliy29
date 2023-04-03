@@ -41,11 +41,11 @@ export default class RangePicker {
 
     if (element.classList.contains('rangepicker__selector-control-left')) {
 
-      this.shiftMonthLeft();
+      //this.shiftMonthLeft();
       // такой обработчик на клик влево не проходит в тестах
     }
     if (element.classList.contains('rangepicker__selector-control-right')) {
-      this.shiftMonthRight();
+      //this.shiftMonthRight();
       // такой обработчик на клик вправо не проходит в тестах
     }
     if (element.classList.contains('rangepicker__cell')) {
@@ -153,8 +153,8 @@ export default class RangePicker {
   updateSelector () {
     const { selector } = this.subElements;
     selector.innerHTML = this.getSelector();
-    //  selector.querySelector(`.${this.classNames.left}`).addEventListener('click', this.shiftMonthLeft);
-    //    selector.querySelector(`.${this.classNames.right}`).addEventListener('click', this.shiftMonthRight);
+    selector.querySelector(`.${this.classNames.left}`).addEventListener('click', this.shiftMonthLeft);
+    selector.querySelector(`.${this.classNames.right}`).addEventListener('click', this.shiftMonthRight);
   }
 
   initMonths () {
@@ -173,18 +173,9 @@ export default class RangePicker {
     input.addEventListener('click', this.onTogglePicker);
     document.addEventListener('click', this.onClosePicker, true);
     selector.addEventListener('click', this.onClickSelector);
-    // если не перехватывать событие при погружении,
-    // то селектор закрывается при клике на стрелки вправо и влево
-    // при клике вправо влево this.element.contains(target) === false;
-    // не понял почему так, ведь только при клике на стрелки,
-    // на все другие элементы внутри селектора this.element.contains(target) === true
-
   }
 
   removeListeners () {
-    const { input, selector } = this.subElements;
-    selector.removeEventListener('click', this.onClickSelector);
-    input.removeEventListener('click', this.onTogglePicker);
     document.removeEventListener('click', this.onClosePicker, true);
   }
 
