@@ -40,11 +40,12 @@ export default class RangePicker {
     const { target: element } = e;
 
     if (element.classList.contains('rangepicker__selector-control-left')) {
-      //this.selectDate(element);
+
+      this.shiftMonthLeft();
       // такой обработчик на клик влево не проходит в тестах
     }
     if (element.classList.contains('rangepicker__selector-control-right')) {
-      //this.selectDate(element);
+      this.shiftMonthRight();
       // такой обработчик на клик вправо не проходит в тестах
     }
     if (element.classList.contains('rangepicker__cell')) {
@@ -152,8 +153,8 @@ export default class RangePicker {
   updateSelector () {
     const { selector } = this.subElements;
     selector.innerHTML = this.getSelector();
-    selector.querySelector(`.${this.classNames.left}`).addEventListener('click', this.shiftMonthLeft);
-    selector.querySelector(`.${this.classNames.right}`).addEventListener('click', this.shiftMonthRight);
+    //  selector.querySelector(`.${this.classNames.left}`).addEventListener('click', this.shiftMonthLeft);
+    //    selector.querySelector(`.${this.classNames.right}`).addEventListener('click', this.shiftMonthRight);
   }
 
   initMonths () {
