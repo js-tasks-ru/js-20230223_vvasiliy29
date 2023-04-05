@@ -44,17 +44,23 @@ export default class SortableList {
     const { target } = event;
     const item = target.closest('li');
     if (!item) {return;}
-    console.log('safas');
+
     if (target.dataset.deleteHandle !== undefined) {
-      item.remove();
-    } else {
-      this.dragItem(event);
+      this.removeItem(item);
+    }
+
+    if (target.dataset.grabHandle !== undefined) {
+      this.dragItem(item, event);
     }
   }
 
-  dragItem ({ target, clientX, clientY }) {
-    const item = target.closest('li');
+  removeItem (item) {
+    if (item) {
+      item.remove();
+    }
+  }
 
+  dragItem (item, { clientX, clientY }) {
     const { width, height, left, top } = item.getBoundingClientRect();
     this.draggingItem = item;
     this.placeHolder = this.createPlaceHolder(width, height);
